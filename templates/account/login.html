@@ -1,0 +1,25 @@
+{% load compress %}
+{% load static %}
+{% load socialaccount %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% compress css %}
+    <link rel="stylesheet" href="{% static 'src/output.css' %}">{% endcompress %}    
+    
+    <title>Login</title>
+</head>
+<body>
+    <div class="min-h-screen flex items-center justify-center bg-gray-100">
+        <div class="max-w-md w-full bg-white p-8 rounded-lg shadow-lg">
+            <h2 class="text-2xl font-bold mb-6">Login</h2>
+            
+            <a href="{% provider_login_url 'google' %}" class="px-4 py-2 bg-blue-600 text-white rounded-lg">
+                Google orqali kirish
+            </a>
+        </div>
+    </div>
+</body>
+</html>
