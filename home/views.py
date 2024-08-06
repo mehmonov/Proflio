@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from django.shortcuts import redirect, render
 import requests
 import json
-
+from django.http import JsonResponse
 from utils.helpers import save_companies, save_skills, save_user_profile
 def home(request):
 
@@ -19,21 +19,20 @@ def mstep(request):
             return render(request, 'multistep.html')
         elif request.method == 'POST':
             
-            data = request.POST # all request data
-            try:
-                # Foydalanuvchi profilini saqlash
-                save_user_profile(request.user, data)
-
-                # Kompaniyalarni saqlash
-                save_companies(request.user, data)
-    
-                # Skillyarni saqlash
-                save_skills(request.user, data)
-
-                return HttpResponse("Data has been saved.")
-            except Exception as e:
-                return HttpResponse(f"Error: {e}")
-
+            print(request.POST)
+            data = request.body
+            data = data.decode('utf-8')
+            data = json.loads(data)
+            
+            full_name = data['full_name']
+            email = data['email']
+            profession = data['profession']
+            experience = data['experience']
+            experiences = data['experiences']
+            
+            print(data)
+        return JsonResponse({'message': 'Data received'},safe=False)
 
     else:   
         return redirect('home')
+
