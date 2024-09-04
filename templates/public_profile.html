@@ -1,0 +1,139 @@
+{% load static %}
+{% load custom_filters %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ profile.user.username }}'s Profile</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+<body class="bg-gradient-to-br from-blue-600 to-blue-800 min-h-screen flex items-center justify-center p-4">
+    <div class="container mx-auto max-w-4xl">
+        <div class="bg-gray-900 rounded-3xl shadow-2xl overflow-hidden">
+
+            <!-- Profile Info -->
+            <div class="pt-20 sm:pt-24 pb-8 px-4 sm:px-8 text-center">
+                <h1 class="text-3xl sm:text-4xl font-bold text-white mb-2">{{ profile.user.first_name }} {{ profile.user.last_name }}</h1>
+                <p class="text-gray-300 text-lg mb-2">@{{ profile.user.username }}</p>
+                <p class="text-gray-400 mb-2">
+                    <i class="fas fa-map-marker-alt mr-2"></i>{{ profile.location }}
+                </p>
+                <p class="text-gray-300 text-lg mb-4">{{ profile.job }}</p>
+                {% if profile.additional_info %}
+                    <p class="text-gray-400 mb-6 max-w-2xl mx-auto">{{ profile.additional_info }}</p>
+                {% endif %}
+                <!-- Contact Buttons -->
+                <div class="flex flex-wrap justify-center gap-4 mb-8">
+                    {% if profile.phone_number %}
+                    <a href="tel:{{ profile.user.phone_number }}" class="px-6 py-2 bg-gray-800 text-gray-300 rounded-full hover:bg-gray-700 transition duration-300 ease-in-out transform hover:scale-105">
+                        <i class="fas fa-phone-alt mr-2"></i>Call
+                    </a>
+                    {% endif %}
+                    <a href="mailto:{{ profile.user.email }}" class="px-6 py-2 bg-gray-800 text-gray-300 rounded-full hover:bg-gray-700 transition duration-300 ease-in-out transform hover:scale-105">
+                        <i class="far fa-envelope mr-2"></i>Email
+                    </a>
+                </div>
+            </div>
+
+            <!-- Social Media Links -->
+           
+            {% if profile.user.companies.all %}
+            <div class="px-4 sm:px-8 pb-8">
+                <h2 class="text-2xl font-bold text-white mb-4">Work Experience</h2>
+                {% for company in profile.user.companies.all %}
+                <div class="mb-6 bg-gray-800 rounded-xl p-4">
+                    <h3 class="text-xl font-semibold text-white">{{ company.name }}</h3>
+                    <p class="text-gray-400 mb-2">{{ company.start_date|date:"M Y" }} - {% if company.end_date %}{{ company.end_date|date:"M Y" }}{% else %}Present{% endif %}</p>
+                    <p class="text-gray-300">{{ company.desc }}</p>
+                </div>
+                {% endfor %}
+            </div>
+            {% endif %}
+            <!-- Skills Section -->
+            {% if profile.user.skills.all %}
+            <div class="px-4 sm:px-8 pb-8">
+                <h2 class="text-2xl font-bold text-white mb-4">Skills</h2>
+                <div class="flex flex-wrap gap-2">
+                    {% for skill in profile.user.skills.all %}
+                    <span class="px-3 py-1 bg-blue-600 text-white rounded-full text-sm">{{ skill.title }}</span>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endif %}
+
+            <!-- Work Experience Section -->
+         
+
+
+
+            {% if profile.user.links %}
+            <div class="px-4 sm:px-8 pb-8">
+                <h2 class="text-2xl font-bold text-white mb-4">Social Media</h2>
+                <div class="flex flex-wrap gap-4 justify-center">
+                    {% for platform in profile.user.links.all %}
+                        {% if platform.telegram_username %}
+                            <a href="https://telegram.me/{{ platform.telegram_username }}" target="_blank" class="px-4 py-2 bg-blue-500 text-white rounded-full hover:bg-blue-600 transition duration-300 ease-in-out transform hover:scale-105">
+                                <i class="fab fa-telegram mr-2"></i>Telegram
+                            </a>
+                        {% endif %}
+                        {% if platform.instagram_username %}
+                            <a href="https://instagram.com/{{ platform.instagram_username }}" target="_blank" class="px-4 py-2 bg-pink-600 text-white rounded-full hover:bg-pink-700 transition duration-300 ease-in-out transform hover:scale-105">
+                                <i class="fab fa-instagram mr-2"></i>Instagram
+                            </a>
+                        {% endif %}
+                        {% if platform.facebook_username %}
+                            <a href="https://facebook.com/{{ platform.facebook_username }}" target="_blank" class="px-4 py-2 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition duration-300 ease-in-out transform hover:scale-105">
+                                <i class="fab fa-facebook-f mr-2"></i>Facebook
+                            </a>
+                        {% endif %}
+                        {% if platform.twitter_username %}
+                            <a href="https://twitter.com/{{ platform.twitter_username }}" target="_blank" class="px-4 py-2 bg-blue-400 text-white rounded-full hover:bg-blue-500 transition duration-300 ease-in-out transform hover:scale-105">
+                                <i class="fab fa-twitter mr-2"></i>Twitter
+                            </a>
+                        {% endif %}
+                        {% if platform.linkedin_username %}
+                            <a href="https://linkedin.com/in/{{ platform.linkedin_username }}" target="_blank" class="px-4 py-2 bg-blue-800 text-white rounded-full hover:bg-blue-900 transition duration-300 ease-in-out transform hover:scale-105">
+                                <i class="fab fa-linkedin-in mr-2"></i>LinkedIn
+                            </a>
+                        {% endif %}
+                        {% if platform.youtube_username %}
+                            <a href="https://youtube.com/{{ platform.youtube_username }}" target="_blank" class="px-4 py-2 bg-red-600 text-white rounded-full hover:bg-red-700 transition duration-300 ease-in-out transform hover:scale-105">
+                                <i class="fab fa-youtube mr-2"></i>YouTube
+                            </a>
+                        {% endif %}
+                        {% if platform.tiktok_username %}
+                            <a href="https://tiktok.com/@{{ platform.tiktok_username }}" target="_blank" class="px-4 py-2 bg-black text-white rounded-full hover:bg-gray-800 transition duration-300 ease-in-out transform hover:scale-105">
+                                <i class="fab fa-tiktok mr-2"></i>TikTok
+                            </a>
+                        {% endif %}
+                        {% if platform.whatsapp_username %}
+                            <a href="https://wa.me/{{ platform.whatsapp_username }}" target="_blank" class="px-4 py-2 bg-green-500 text-white rounded-full hover:bg-green-600 transition duration-300 ease-in-out transform hover:scale-105">
+                                <i class="fab fa-whatsapp mr-2"></i>WhatsApp
+                            </a>
+                        {% endif %}
+                        {% if platform.github_username %}
+                            <a href="https://github.com/{{ platform.github_username }}" target="_blank" class="px-4 py-2 bg-gray-800 text-white rounded-full hover:bg-gray-900 transition duration-300 ease-in-out transform hover:scale-105">
+                                <i class="fab fa-github mr-2"></i>GitHub
+                            </a>
+                        {% endif %}
+                    {% endfor %}
+                    {% if profile.user.links.project_url %}
+                        <a href="{{ profile.user.links.project_url }}" target="_blank" class="px-4 py-2 bg-gray-600 text-white rounded-full hover:bg-gray-700 transition duration-300 ease-in-out transform hover:scale-105">
+                            <i class="fas fa-link mr-2"></i>Project
+                        </a>
+                    {% endif %}
+                </div>
+            </div>
+            {% endif %}
+            <!-- Footer -->
+            <div class="mt-8 text-center pb-8">
+                <a href="#" class="text-blue-300 hover:text-blue-200 transition duration-300 ease-in-out">
+                    <i class="fas fa-link mr-2"></i>Create your own page
+                </a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

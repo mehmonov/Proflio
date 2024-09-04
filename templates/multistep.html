@@ -1,233 +1,208 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-     
-	<link rel="stylesheet" href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css">
-	<script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.js" defer></script>
+	{% load static %}
+	<!DOCTYPE html>
+	<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Document</title>
+		
+		<link rel="stylesheet" href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css">
+		<script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.js" defer></script>
 
-    <link rel="stylesheet" href="{% static "style.css" %}">
-</head>
-<body>
-    
-<!-- This is an example component -->
-<div class="h-screen">
+		<link rel="stylesheet" href="{% static "style.css" %}">
+	</head>
+	<body>
+		
+	<div class="h-screen">
 
-	
-	<div x-data="app()" x-cloak>
-		<form @submit.prevent="submitForm">
-			{% csrf_token %}
-			<div class="max-w-3xl mx-auto px-4 py-10">
-				<form @submit.prevent="submitForm">
+		
+		<div x-data="app()" x-cloak>
+			<form method="POST" action="{% url "mstep" %}"  enctype="multipart/form-data">
+				{% csrf_token %}
+				
+				<div class="max-w-3xl mx-auto px-4 py-10">
 
-				<div x-show.transition="step === 'complete'">
-					<div class="bg-white rounded-lg p-10 flex items-center shadow justify-between">
-						<div>
-							<svg class="mb-4 h-20 w-20 text-green-500 mx-auto" viewBox="0 0 20 20" fill="currentColor">  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+					<div x-show.transition="step === 'complete'">
+						<div class="bg-white rounded-lg p-10 flex items-center shadow justify-between">
+							<div>
+								<svg class="mb-4 h-20 w-20 text-green-500 mx-auto" viewBox="0 0 20 20" fill="currentColor">  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
 
-							<h2 class="text-2xl mb-4 text-gray-800 text-center font-bold">Registration Success</h2>
+								<h2 class="text-2xl mb-4 text-gray-800 text-center font-bold">Registration Success</h2>
 
-							<div class="text-gray-600 mb-8">
-								Thank you. We have sent you an email to demo@demo.test. Please click the link in the message to activate your account.
-							</div>
-
-							<button
-								type="button"
-								@click="step = 1"
-								class="w-40 block mx-auto focus:outline-none py-2 px-5 rounded-lg shadow-sm text-center text-gray-600 bg-white hover:bg-gray-100 font-medium border" 
-							>Back to home</button>
-						</div>
-					</div>
-				</div>
-
-				<div x-show.transition="step != 'complete'">	
-					<!-- Top Navigation -->
-					<div class="border-b-2 py-4">
-						<div class="uppercase tracking-wide text-xs font-bold text-gray-500 mb-1 leading-tight" x-text="`Step: ${step} of 3`"></div>
-						<div class="flex flex-col md:flex-row md:items-center md:justify-between">
-							<div class="flex-1">
-								<div x-show="step === 1">
-									<div class="text-lg font-bold text-gray-700 leading-tight">Basic information</div>
-								</div>
-								
-								<div x-show="step === 2">
-									<div class="text-lg font-bold text-gray-700 leading-tight">Your Profession</div>
+								<div class="text-gray-600 mb-8">
+									Thank you. We have sent you an email to demo@demo.test. Please click the link in the message to activate your account.
 								</div>
 
-								<div x-show="step === 3">
-									<div class="text-lg font-bold text-gray-700 leading-tight">Tell me about yourself</div>
-								</div>
-								
-							</div>
-
-							<div class="flex items-center md:w-64">
-								<div class="w-full bg-white rounded-full mr-2">
-									<div class="rounded-full bg-green-500 text-xs leading-none h-2 text-center text-white" :style="'width: '+ parseInt(step / 3 * 100) +'%'"></div>
-								</div>
-								<div class="text-xs w-10 text-gray-600" x-text="parseInt(step / 3 * 100) +'%'"></div>
-							</div>
-						</div>
-					</div>
-					<!-- /Top Navigation -->
-
-					<!-- Step Content -->
-					<div class="py-10">	
-						<div x-show.transition.in="step === 1">
-							<div class="mb-5 text-center">
-								<div class="mx-auto w-32 h-32 mb-2 border rounded-full relative bg-gray-100 mb-4 shadow-inset">
-									<img id="image" class="object-cover w-full h-32 rounded-full" :src="image" />
-								</div>
-								
-								<label 
-									for="fileInput"
+								<button
 									type="button"
-									class="cursor-pointer inine-flex justify-between items-center focus:outline-none border py-2 px-4 rounded-lg shadow-sm text-left text-gray-600 bg-white hover:bg-gray-100 font-medium"
-								>
-									<svg xmlns="http://www.w3.org/2000/svg" class="inline-flex flex-shrink-0 w-6 h-6 -mt-1 mr-1" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-										<rect x="0" y="0" width="24" height="24" stroke="none"></rect>
-										<path d="M5 7h1a2 2 0 0 0 2 -2a1 1 0 0 1 1 -1h6a1 1 0 0 1 1 1a2 2 0 0 0 2 2h1a2 2 0 0 1 2 2v9a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-9a2 2 0 0 1 2 -2" />
-										<circle cx="12" cy="13" r="3" />
-									</svg>						
-									Browse Photo
-								</label>
-
-								<div class="mx-auto w-48 text-gray-500 text-xs text-center mt-2">Click to add profile picture</div>
-
-								<input name="photo" id="fileInput" accept="image/*" class="hidden" type="file" @change="let file = document.getElementById('fileInput').files[0]; 
-									var reader = new FileReader();
-									reader.onload = (e) => image = e.target.result;
-									reader.readAsDataURL(file);">
-							</div>
-
-							<div class="mb-5">
-								<label for="fullname" class="font-bold mb-1 text-gray-700 block">Full name</label>
-								<input type="text"
-									name="fullname"
-									id="fullname"
-									class="w-full px-4 py-3 rounded-lg shadow-sm focus:outline-none focus:shadow-outline text-gray-600 font-medium border"
-									placeholder="Enter your fullname...">
-							</div>
-
-							<div class="mb-5">
-								<label for="email" class="font-bold mb-1 text-gray-700 block">Email</label>
-								<input type="email"
-									id="email"
-									class="w-full px-4 py-3 rounded-lg shadow-sm focus:outline-none focus:shadow-outline text-gray-600 font-medium border "
-									placeholder="Enter your email address...">
-							</div>
-							<div class="mb-5">
-								<label for="profession" class="font-bold mb-1 text-gray-700 block">Profession</label>
-								<input type="text" id="profession" name="profession" class="w-full px-4 py-3 rounded-lg shadow-sm focus:outline-none focus:shadow-outline text-gray-600 font-medium border" placeholder="eg. web developer">
+									@click="step = 1"
+									class="w-40 block mx-auto focus:outline-none py-2 px-5 rounded-lg shadow-sm text-center text-gray-600 bg-white hover:bg-gray-100 font-medium border" 
+								>Back to home</button>
 							</div>
 						</div>
+					</div>
+
+					<div x-show.transition="step != 'complete'">	
+						<!-- Top Navigation -->
+						<div class="border-b-2 py-4">
+							<div class="uppercase tracking-wide text-xs font-bold text-gray-500 mb-1 leading-tight" x-text="`Step: ${step} of 3`"></div>
+							<div class="flex flex-col md:flex-row md:items-center md:justify-between">
+								<div class="flex-1">
+									<div x-show="step === 1">
+										<div class="text-lg font-bold text-gray-700 leading-tight">Basic information</div>
+									</div>
+									
+									<div x-show="step === 2">
+										<div class="text-lg font-bold text-gray-700 leading-tight">Your Profession</div>
+									</div>
+
+									<div x-show="step === 3">
+										<div class="text-lg font-bold text-gray-700 leading-tight">Tell me about yourself</div>
+									</div>
+									
+								</div>
+
+								<div class="flex items-center md:w-64">
+									<div class="w-full bg-white rounded-full mr-2">
+										<div class="rounded-full bg-green-500 text-xs leading-none h-2 text-center text-white" :style="'width: '+ parseInt(step / 3 * 100) +'%'"></div>
+									</div>
+									<div class="text-xs w-10 text-gray-600" x-text="parseInt(step / 3 * 100) +'%'"></div>
+								</div>
+							</div>
+						</div>
+						<!-- /Top Navigation -->
+
+						<!-- Step Content -->
+						<div class="py-10">	
+							<div x-show.transition.in="step === 1">
+								<div class="mb-5 text-center">
+									<div class="mx-auto w-32 h-32 mb-2 border rounded-full relative bg-gray-100 mb-4 shadow-inset">
+										<img id="image" class="object-cover w-full h-32 rounded-full" :src="image" />
+									</div>
+									
+									<label 
+										for="fileInput"
+										type="button"
+										class="cursor-pointer inine-flex justify-between items-center focus:outline-none border py-2 px-4 rounded-lg shadow-sm text-left text-gray-600 bg-white hover:bg-gray-100 font-medium"
+									>
+										<svg xmlns="http://www.w3.org/2000/svg" class="inline-flex flex-shrink-0 w-6 h-6 -mt-1 mr-1" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+											<rect x="0" y="0" width="24" height="24" stroke="none"></rect>
+											<path d="M5 7h1a2 2 0 0 0 2 -2a1 1 0 0 1 1 -1h6a1 1 0 0 1 1 1a2 2 0 0 0 2 2h1a2 2 0 0 1 2 2v9a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-9a2 2 0 0 1 2 -2" />
+											<circle cx="12" cy="13" r="3" />
+										</svg>						
+										Browse Photo
+									</label>
+
+									<div class="mx-auto w-48 text-gray-500 text-xs text-center mt-2">Click to add profile picture</div>
+
+									<input name="photo" id="fileInput" accept="image/*" class="hidden" type="file" @change="let file = document.getElementById('fileInput').files[0]; 
+										var reader = new FileReader();
+										reader.onload = (e) => image = e.target.result;
+										reader.readAsDataURL(file);">
+								</div>
+
+								<div class="mb-5">
+									<label for="fullname" class="font-bold mb-1 text-gray-700 block">Full name</label>
+									<input type="text"
+										name="fullname"
+										id="fullname"
+										class="w-full px-4 py-3 rounded-lg shadow-sm focus:outline-none focus:shadow-outline text-gray-600 font-medium border"
+										placeholder="Enter your fullname...">
+								</div>
+
+								
+								<div class="mb-5">
+									<label for="profession" class="font-bold mb-1 text-gray-700 block">Profession</label>
+									<input type="text"  id="profession" name="profession" class="w-full px-4 py-3 rounded-lg shadow-sm focus:outline-none focus:shadow-outline text-gray-600 font-medium border" placeholder="eg. web developer">
+								</div>
+								<div class="mb-5">
+									<label for="location" class="font-bold mb-1 text-gray-700 block">location</label>
+									<input type="text"  id="location" name="location" class="w-full px-4 py-3 rounded-lg shadow-sm focus:outline-none focus:shadow-outline text-gray-600 font-medium border" placeholder="eg. web developer">
+								</div>
+								<div class="mb-5">
+									<label for="phone_number" class="font-bold mb-1 text-gray-700 block">Phone number</label>
+									<input type="text"  id="phone_number" name="phone_number" class="w-full px-4 py-3 rounded-lg shadow-sm focus:outline-none focus:shadow-outline text-gray-600 font-medium border" placeholder="eg. web developer">
+								</div>
+							</div>
+							
+							<div x-show.transition.in="step === 2">
+								<div class="mb-5">
+									<label for="experience" class="font-bold mb-1 text-gray-700 block">Do you have experience?</label>
+									<div class="flex">
+										<label class="flex justify-start items-center text-truncate rounded-lg bg-white pl-4 pr-6 py-3 shadow-sm mr-4">
+											<div class="text-teal-600 mr-3">
+												<input type="radio" name="has_experience"  id="experience" value="yes" class="form-radio focus:outline-none focus:shadow-outline" @change="hasExperience = true" />
+											</div>
+											<div class="select-none text-gray-700">Yes</div>
+										</label>
+										<label class="flex justify-start items-center text-truncate rounded-lg bg-white pl-4 pr-6 py-3 shadow-sm">
+											<div class="text-teal-600 mr-3">
+												<input type="radio" name="has_experience" value="no" id="experience" class="form-radio focus:outline-none focus:shadow-outline" @change="hasExperience = false" />
+											</div>
+											<div class="select-none text-gray-700">No</div>
+										</label>
+									</div>
+								</div>
+
+								<div x-show="hasExperience">
+									<div id="experiences-container">
+										<!-- Experience fields will be dynamically added here -->
+									</div>
+									<button type="button" @click="addExperience()" class="bg-blue-500 text-white px-4 py-2 rounded">Add Experience</button>
+								</div>
+							</div>
+							<div x-show.transition.in="step === 3">
 						
-						<div x-show.transition.in="step === 2">
-							<div class="mb-5">
-								<label for="experience" class="font-bold mb-1 text-gray-700 block">Do you have experience?</label>
-								<div class="flex">
-									<label class="flex justify-start items-center text-truncate rounded-lg bg-white pl-4 pr-6 py-3 shadow-sm mr-4">
-										<div class="text-teal-600 mr-3">
-											<input type="radio" name="experience" id="experience" value="yes" class="form-radio focus:outline-none focus:shadow-outline" @change="hasExperience = true" />
-										</div>
-										<div class="select-none text-gray-700">Yes</div>
-									</label>
-									<label class="flex justify-start items-center text-truncate rounded-lg bg-white pl-4 pr-6 py-3 shadow-sm">
-										<div class="text-teal-600 mr-3">
-											<input type="radio" name="experience" value="no" id="experience" class="form-radio focus:outline-none focus:shadow-outline" @change="hasExperience = false" />
-										</div>
-										<div class="select-none text-gray-700">No</div>
-									</label>
+								<div class="mb-5">
+									<label for="description" class="font-bold mb-1 text-gray-700 block">Describe you </label>
+									<textarea type="text"
+										id="description"
+										name="description"
+										class="w-full px-4 py-3 rounded-lg shadow-sm focus:outline-none focus:shadow-outline text-gray-600 font-medium border"
+										>e.g I'm web developer. </textarea>
 								</div>
 							</div>
-
-							<template x-if="hasExperience">
-								<div>
-									<template x-for="(experience, index) in experiences" :key="index">
-										<div class="mb-5 border p-4 rounded-lg shadow-sm">
-											<div class="mb-5">
-												<label for="company" class="font-bold mb-1 text-gray-700 block">Company Name</label>
-												<input type="text" name="company" class="w-full px-4 py-3 rounded-lg shadow-sm focus:outline-none focus:shadow-outline text-gray-600 font-medium border" placeholder="Enter company name" x-model="experience.company">
-											</div>
-											<div class="mb-5">
-												<label for="job_description" class="font-bold mb-1 text-gray-700 block">Job Description</label>
-												<textarea type="text" class="w-full px-4 py-3 rounded-lg shadow-sm focus:outline-none focus:shadow-outline text-gray-600 font-medium border" placeholder="Enter job description" name="description" x-model="experience.job_description"></textarea>
-											</div>
-											<div class="mb-5">
-												<label for="start_date" class="font-bold mb-1 text-gray-700 block">Start Date</label>
-												<input type="date" name="start_date" class="w-full px-4 py-3 rounded-lg shadow-sm focus:outline-none focus:shadow-outline text-gray-600 font-medium border" x-model="experience.start_date">
-											</div>
-											<div class="mb-5">
-												<label for="end_date" class="font-bold mb-1 text-gray-700 block">End Date</label>
-												<input type="date" name="end_date" class="w-full px-4 py-3 rounded-lg shadow-sm focus:outline-none focus:shadow-outline text-gray-600 font-medium border" x-model="experience.end_date">
-											</div>
-											<div class="mb-5 flex items-center">
-												<input type="checkbox" name="Currently_working" class="form-checkbox h-5 w-5 text-teal-600" x-model="experience.currently_working">
-												<span class="ml-2 text-gray-700">Currently Working</span>
-											</div>
-										</div>
-									</template>
-
-									<button type="button" @click="addExperience" class="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-teal-600 hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500">
-										Add Another Company
-									</button>
-								</div>
-							</template>
 						</div>
-						<div x-show.transition.in="step === 3">
-					
-							<div class="mb-5">
-								<label for="firstname" class="font-bold mb-1 text-gray-700 block">Describe you </label>
-								<textarea type="text"
-									id="description"
-									name="description"
-									class="w-full px-4 py-3 rounded-lg shadow-sm focus:outline-none focus:shadow-outline text-gray-600 font-medium border"
-									>e.g I'm web developer. </textarea>
+						<!-- / Step Content -->
+					</div>
+				</div>
+
+				<!-- Bottom Navigation -->	
+				<div class="fixed bottom-0 left-0 right-0 py-5 bg-white shadow-md" x-show="step != 'complete'">
+					<div class="max-w-3xl mx-auto px-4">
+						<div class="flex justify-between">
+							<div class="w-1/2">
+								<button
+								type="button"
+
+									x-show="step > 1"
+									@click="step--"
+									class="w-32 focus:outline-none py-2 px-5 rounded-lg shadow-sm text-center text-gray-600 bg-white hover:bg-gray-100 font-medium border" 
+								>Previous</button>
+							</div>
+
+							<div class="w-1/2 text-right">
+								<button
+								type="button"
+									x-show="step < 3"
+									@click="step++"
+									class="w-32 focus:outline-none border border-transparent py-2 px-5 rounded-lg shadow-sm text-center text-white bg-blue-500 hover:bg-blue-600 font-medium" 
+								>Next</button>
+
+								<button
+									type="submit"
+									@click="step = 'complete'"
+									x-show="step === 3"
+									class="w-32 focus:outline-none border border-transparent py-2 px-5 rounded-lg shadow-sm text-center text-white bg-blue-500 hover:bg-blue-600 font-medium" 
+								>Complete</button>
 							</div>
 						</div>
 					</div>
-					<!-- / Step Content -->
 				</div>
-			</div>
+			</form>
 
-			<!-- Bottom Navigation -->	
-			<div class="fixed bottom-0 left-0 right-0 py-5 bg-white shadow-md" x-show="step != 'complete'">
-				<div class="max-w-3xl mx-auto px-4">
-					<div class="flex justify-between">
-						<div class="w-1/2">
-							<button
-							type="button"
-
-								x-show="step > 1"
-								@click="step--"
-								class="w-32 focus:outline-none py-2 px-5 rounded-lg shadow-sm text-center text-gray-600 bg-white hover:bg-gray-100 font-medium border" 
-							>Previous</button>
-						</div>
-
-						<div class="w-1/2 text-right">
-							<button
-							type="button"
-								x-show="step < 3"
-								@click="step++"
-								class="w-32 focus:outline-none border border-transparent py-2 px-5 rounded-lg shadow-sm text-center text-white bg-blue-500 hover:bg-blue-600 font-medium" 
-							>Next</button>
-
-							<button
-								type="submit"
-								@click="step = 'complete'"
-								x-show="step === 3"
-								class="w-32 focus:outline-none border border-transparent py-2 px-5 rounded-lg shadow-sm text-center text-white bg-blue-500 hover:bg-blue-600 font-medium" 
-							>Complete</button>
-						</div>
-					</div>
-				</div>
-			</div>
-		</form>
-
-	</div>
-	
-</body>
-<script src="{% static "script.js" %}"></script>
-</html>
+		</div>
+		
+	</body>
+	<script src="{% static "script.js" %}"></script>
+	</html> 

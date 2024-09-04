@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Company, Profile, Skills
+from .models import Company, Profile, Skills, Link
 from unfold.admin import ModelAdmin # type: ignore
 
 
@@ -11,4 +11,7 @@ class CustomCompanyClass(ModelAdmin):
     pass
 @admin.register(Skills)
 class CustomSkillsClass(ModelAdmin):
+    pass
+@admin.register(Link)
+class CustomLinkClass(ModelAdmin):
     pass

@@ -20,7 +20,6 @@ DEBUG = True
 ALLOWED_HOSTS = ['*']
 
 
-
 INSTALLED_APPS = [
     "unfold",  # before django.contrib.admin
     'django.contrib.admin',
