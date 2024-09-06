@@ -1,35 +1,24 @@
-name: Django CI/CD
+name: Deploy to Server
 
 on:
   push:
-    branches: [ master ]  # yoki master, asosiy branch nomiga qarab
+    branches: [ main ]  # yoki master, asosiy branch nomiga qarab
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
-
-      - name: Install SSH Key
-        uses: shimataro/ssh-key-action@v2
-        with:
-          key: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDBs7zDDV8k/MpSpXzx/IOjQXyIEuX96tcg3wJGIRlEF85+4+sLxtqy/1cLEWj6UoDJHhthkqRKxIxvFBaceqHR3Yxskx5FxVi3HojFM53EKwsZkDb5p9GehTAoDNQsJATF5sDvEXIpLvA6VUI3Nubi9V4j7wGRLLQNebyYF+eCz7gMsSLKDfdlFbCUz//a99ys1PmMR6dPcsEudnMVtKFFYvZQ0qtuCohRPCxF1flDrZjW7ZUMRAcW354fKYWqQDqQSArtoeYoaXFao8k5gkmMLc350erQSMc/FjzpUzEyFR6JE0BEcUQjdDIz/mp/jB2epC/6P8Yj+zN+uwAomeBG1jzjl8xGu0/0ogOxTQB3pOJ1WBLOXunYCabGhc4f+b8tD1UNhI7qj5cewthbZ6tqFp3oLJeq+guvrupGQAIC28zWqAZU4cOwZS4jHF36W36v4jpl3mXdHJbzO3y2zxWE1FHfuP5s7aLX9B2S1UuId2yT+45oyPXoIIDvdFz6GhZRLBmrQjLwfIcO7khHFuHMks6Io07E5wwb87Mw2yRCKcx53Qt48R/Fj+Z2AyFiW6KKlc1cOH2wxkht8kUwFOP6XBWlCX8fdvt0jtVaj88hCgCsnvp9jI7wPHT6ZE7AyAcI+iBhE8apWxlgLXX6IRKaLSAsoDIGksHnx5MaMaEAcQ== uzbekfreedom@gmail.com"
-          known_hosts: "# 77.232.128.142:22 SSH-2.0-OpenSSH_8.9p1 Ubuntu-3ubuntu0.10
-            # 77.232.128.142:22 SSH-2.0-OpenSSH_8.9p1 Ubuntu-3ubuntu0.10
-            |1|cgV+t5KIPfYgLrlr9YrE7tM+Umw=|cet30tKB+Q1yUARfE+Hls7KoDl4= ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCV838AMQdDLcopJy+ZGXe1sPED83jAPSVxDHY+92UthhgHkEju3fv3GzpzRJ5EQoe2dvSXvgExGsaWi/9zX1zAcKgideLPA/IgkYIeK92MN/b0onC107aq/owzKU0d3sHmJbFWwUZTBOeic53lPqgwCR5OLsHG6IcfcTuOP6WDluYD191rXtg98N51empmlOPibH73jGWGjAODAVa815mprz3cMTJw8dEoECj/vlUZrery78zhIk6Imj4HagcX8v7KmJhZmSKAu/PLh0uYbKM4KWiWwPThVvjtlLBiLlp8kpeyiIHRi60JdkFMfRKWRNGdCtfEdvOb/dH0mwYdzEWdnUcoNpOs5a373NXgGNwoW4Cxq1/SP9znkq/Nm6yUWxY+m/VkwTtzbMeQDH6NWkhF7A5ClnVgb8IYOxEQ33kduvax9RpdOp+AQQ9z9j4Z0kT8SpenPSPmOQZ2oULZG4ntaIWuk49opUoqHkQV6UFaBH097FpnQJ0qFzcJcuK70X8=
-            # 77.232.128.142:22 SSH-2.0-OpenSSH_8.9p1 Ubuntu-3ubuntu0.10
-            |1|h9hYyrfhxkoVBL80jUrNSAC66gE=|Zy1s0hMnoTQJ1ynkzNZOD7NY/sU= ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBBJgi4d+eJXaGiFld+yq23aBxo0+Rwx76cjxlGx9qwS0lONuYs6dcTDY3sIwW1KpKYjtHGBOw8D2hd+L9bYNT4Q=
-            # 77.232.128.142:22 SSH-2.0-OpenSSH_8.9p1 Ubuntu-3ubuntu0.10
-            |1|rpzcXXlPgsccWeaBK1kDCATCb3E=|6sHJxiU0tsauCBo2EBteNFP0eY8= ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPjbbk/mj/WEf7FoVQMOzGIw6FyILXnaQVORGVBfG02I
-            # 77.232.128.142:22 SSH-2.0-OpenSSH_8.9p1 Ubuntu-3ubuntu0.10"
-      
-      - name: Deploy to server
-        run: |
-          ssh -o StrictHostKeyChecking=accept-new root@77.232.128.142 << 'EOF'
+    - uses: actions/checkout@v2
+    
+    - name: Install SSH Key
+      uses: shimataro/ssh-key-action@v2
+      with:
+        key: ${{ secrets.SSH_PRIVATE_KEY }}
+        known_hosts: ${{ secrets.KNOWN_HOSTS }}
+    
+    - name: Deploy to server
+      run: |
+        ssh -o StrictHostKeyChecking=accept-new -v root@77.232.128.142 << 'EOF'
           cd /home/Proflio
           git pull
           source /home/venv/bin/activate
@@ -37,12 +26,4 @@ jobs:
           python manage.py migrate
           python manage.py collectstatic --noinput
           supervisorctl restart all
-          EOF
-
-      - name: Debug SSH connection
-        env:
-          HOST: 77.232.128.142
-          USER: root
-          PASSWORD: 'v376f.AYmf@#Rx'
-        run: |
-          sshpass -p $PASSWORD ssh -o StrictHostKeyChecking=accept-new $USER@$HOST echo "SSH connection successful"
+        EOF
