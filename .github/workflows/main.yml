@@ -2,7 +2,7 @@ name: Deploy to Server
 
 on:
   push:
-    branches: [ master ]  # yoki master, asosiy branch nomiga qarab
+    branches: [ master ] 
 
 jobs:
   deploy:
@@ -22,7 +22,7 @@ jobs:
           cd /home/Proflio
           git pull 
           source /home/env/bin/activate
-          pip install -r req.txt
+          pip install -r requirements.txt
           python manage.py migrate
           python manage.py collectstatic --noinput
           supervisorctl restart all
