@@ -16,10 +16,11 @@ jobs:
           fetch-depth: 0
 
       - name: Install SSH Key
-        uses: shimataro/ssh-key-action@v2
+        uses: appleboy/ssh-action@master
         with:
+          host: ${{ secrets.SERVER_IP }}
+          username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
-          known_hosts: ${{ secrets.KNOWN_HOSTS }}
 
       - name: Deploy to Server
         run: |
