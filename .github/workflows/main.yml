@@ -2,8 +2,7 @@ name: Django CI/CD
 
 on:
   push:
-    branches:
-      - master  
+    branches: [ main ]  # yoki master, asosiy branch nomiga qarab
 
 jobs:
   deploy:
@@ -16,19 +15,20 @@ jobs:
           fetch-depth: 0
 
       - name: Install SSH Key
-        uses: appleboy/ssh-action@master
+        uses: shimataro/ssh-key-action@v2
         with:
-          host: "77.232.128.142"
-          username: "root"
-          password: "v376f.AYmf@#Rx"
-
-      - name: Deploy to Server
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          known_hosts: ${{ secrets.KNOWN_HOSTS }}
+      
+      - name: Deploy to server
         run: |
-          ssh -o StrictHostKeyChecking=no root@77.232.128.142 << 'EOF'
+          ssh -o StrictHostKeyChecking=accept-new root@77.232.128.142 << 'EOF'
           cd /home/Proflio
           git pull
           source /home/venv/bin/activate
-          pip install -r req.txt
+          pip install -r requirements.txt
+          python manage.py migrate
+          python manage.py collectstatic --noinput
           supervisorctl restart all
           EOF
 
