@@ -2,7 +2,7 @@ name: Deploy to Server
 
 on:
   push:
-    branches: [ main ]  # yoki master, asosiy branch nomiga qarab
+    branches: [ master ]  # yoki master, asosiy branch nomiga qarab
 
 jobs:
   deploy:
