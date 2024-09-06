@@ -1,41 +1,26 @@
-name: Django CI/CD with Supervisor 
+name: Django CI/CD
 
 on:
   push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
+    branches:
+      - main  # Yoki asosiy branchingiz nomi
 
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
-    
+
     steps:
-    - uses: actions/checkout@v2
-    
-    - name: Set up Python
-      uses: actions/setup-python@v2
-      with:
-        python-version: '3.x'
-    
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install -r req.txt
-    
-    - name: Deploy to Timeweb
-      if: success() && github.ref == 'refs/heads/main'
-      env:
-        TIMEWEB_HOST: ${{ secrets.TIMEWEB_HOST }}
-        TIMEWEB_USERNAME: ${{ secrets.TIMEWEB_USERNAME }}
-        TIMEWEB_PASSWORD: ${{ secrets.TIMEWEB_PASSWORD }}
-      run: |
-        sudo apt-get install -y sshpass
-        sshpass -p "$TIMEWEB_PASSWORD" ssh -o StrictHostKeyChecking=no $TIMEWEB_USERNAME@$TIMEWEB_HOST "
-          cd /home/Proflio && 
-          git pull origin main && 
-          source /home/env/bin/activate && 
-          pip install -r req.txt && 
-          python manage.py migrate && 
-          sudo supervisorctl restart gunicorn
-        "
+      - name: Checkout code
+        uses: actions/checkout@v2
+        with:
+          persist-credentials: false  # SSH kalitdan foydalanish
+          fetch-depth: 0
+
+      - name: Setup SSH
+        uses: webfactory/ssh-agent@v0.5.3
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: Deploy to Server
+        run: |
+          ssh root@77.232.128.142 "cd /home/Proflio && git pull && source /home/venv/bin/activate && pip install -r req.txt && supervisorctl restart all"
