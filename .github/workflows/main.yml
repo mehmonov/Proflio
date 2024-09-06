@@ -20,7 +20,7 @@ jobs:
         with:
           host: "77.232.128.142"
           username: "root"
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          password: "v376f.AYmf@#Rx"
 
       - name: Deploy to Server
         run: |
