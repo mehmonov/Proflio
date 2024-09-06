@@ -23,4 +23,10 @@ jobs:
 
       - name: Deploy to Server
         run: |
-          ssh root@77.232.128.142 "cd /home/Proflio && git pull && source /home/venv/bin/activate && pip install -r req.txt && supervisorctl restart all"
+          ssh -o StrictHostKeyChecking=no root@77.232.128.142 << 'EOF'
+          cd /home/Proflio
+          git pull
+          source /home/venv/bin/activate
+          pip install -r req.txt
+          supervisorctl restart all
+          EOF
