@@ -3,8 +3,11 @@ from django.urls import include, path
 from home.views import home, mstep, profile, update_user_info, update_skills, update_company, update_links, update_website_style
 from django.conf import settings
 from django.conf.urls.static import static
+def trigger_error(request):
+    division_by_zero = 1 / 0
 
 urlpatterns = [
+    path('sentry-debug/', trigger_error),
     path('accounts/', include('allauth.urls')),
     path('admin/', admin.site.urls),
     path('', home, name='home'),
