@@ -10,7 +10,7 @@ bcrypt==3.2.0
 blessed==1.20.0
 bottle==0.12.25
 cachetools==5.3.3
-certifi==2020.6.20
+certifi==2023.11.17
 chardet==4.0.0
 click==8.0.3
 codefind==0.1.6
@@ -35,7 +35,7 @@ googleapis-common-protos==1.63.2
 grpcio==1.64.1
 grpcio-status==1.64.1
 gunicorn==23.0.0
-idna==3.3
+idna==2.10
 Jinja2==3.1.4
 jurigged==0.5.7
 MarkupSafe==2.0.1
@@ -62,7 +62,7 @@ sentry-sdk==2.13.0
 six==1.16.0
 sqlparse==0.5.0
 typing_extensions==4.12.2
-urllib3==2.2.2
+urllib3==1.26.18
 watchdog==4.0.0
 wcwidth==0.2.13
 WebOb==1.8.8
