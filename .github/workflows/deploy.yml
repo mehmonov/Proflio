@@ -18,12 +18,11 @@ jobs:
 
     - name: Install dependencies
       run: |
-        sudo apt-get update 
-        sudo apt install -y apparmor apturl
         python -m pip install --upgrade pip
         pip install -r requirements.txt
 
- 
+    # ... (testlar va boshqa qadamlar) ...
+
     - name: Deploy to server
       uses: appleboy/ssh-action@master
       with:
@@ -46,6 +45,8 @@ jobs:
           python3 -m venv venv
           source venv/bin/activate
           pip install -r requirements.txt
+          sudo apt-get update
+          sudo apt-get install -y $(cat requirements_server.txt | cut -d'=' -f1)
           python manage.py migrate
           python manage.py collectstatic --noinput
           sudo supervisorctl restart ${{ secrets.PROJECT_NAME }}
