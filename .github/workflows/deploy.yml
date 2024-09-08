@@ -18,7 +18,8 @@ jobs:
 
     - name: Install dependencies
       run: |
-        apt install -y apparmor apturl
+        sudo apt-get update 
+        sudo apt install -y apparmor apturl
         python -m pip install --upgrade pip
         pip install -r requirements.txt
 
