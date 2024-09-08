@@ -14,7 +14,7 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v2
       with:
-        python-version: '3.10'  # Python versiyasini 3.10 ga o'zgartiring
+        python-version: '3.10'
 
     - name: Install dependencies
       run: |
@@ -23,7 +23,6 @@ jobs:
         pip install Cython
         pip install -r requirements.txt
 
-    # ... (testlar va boshqa qadamlar) ...
 
     - name: Deploy to server
       uses: appleboy/ssh-action@master
@@ -36,14 +35,14 @@ jobs:
           eval $(ssh-agent -s)
           echo "${{ secrets.SSH_PRIVATE_KEY }}" | ssh-add -
           ssh-keyscan -H github.com >> ~/.ssh/known_hosts
-          cd /root
+          cd /home/
           if [ ! -d "${{ secrets.PROJECT_NAME }}" ]; then
             git clone git@github.com:mehmonov/${{ secrets.PROJECT_NAME }}.git
           else
-            cd ${{ secrets.PROJECT_NAME }}
+            cd /home/${{ secrets.PROJECT_NAME }}
             git pull origin main
           fi
-          cd ${{ secrets.PROJECT_NAME }}
+          cd /home/${{ secrets.PROJECT_NAME }}
           python3 -m venv venv
           source venv/bin/activate
           pip install --upgrade pip
