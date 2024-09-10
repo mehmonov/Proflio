@@ -1,5 +1,21 @@
 <div class="pt-20 sm:pt-24 pb-8 px-4 sm:px-8 text-center">
-    <img class="mx-auto h-32 w-32 rounded-full" src="{{ profile.avatar_url|default:'path/to/default/avatar.png' }}" alt="{{ profile.user.username }}">
-    <h1 class="mt-4 text-3xl font-bold text-white">{{ profile.user.get_full_name }}</h1>
-    <p class="text-xl text-gray-300">{{ profile.job|default:"Not specified" }}</p>
+    <h1 class="text-3xl sm:text-4xl font-bold text-white mb-2">{{ profile.user.first_name }} {{ profile.user.last_name }}</h1>
+    <p class="text-gray-300 text-lg mb-2">@{{ profile.user.username }}</p>
+    <p class="text-gray-400 mb-2">
+        <i class="fas fa-map-marker-alt mr-2"></i>{{ profile.location }}
+    </p>
+    <p class="text-gray-300 text-lg mb-4">{{ profile.job }}</p>
+    {% if profile.additional_info %}
+        <p class="text-gray-400 mb-6 max-w-2xl mx-auto">{{ profile.additional_info }}</p>
+    {% endif %}
+    <div class="flex justify-center gap-4 mb-8">
+        {% if profile.phone_number %}
+        <a href="tel:{{ profile.user.phone_number }}" class="px-6 py-2 bg-gray-800 text-gray-300 rounded-full hover:bg-gray-700 transition duration-300">
+            <i class="fas fa-phone-alt mr-2"></i>Call
+        </a>
+        {% endif %}
+        <a href="mailto:{{ profile.user.email }}" class="px-6 py-2 bg-gray-800 text-gray-300 rounded-full hover:bg-gray-700 transition duration-300">
+            <i class="far fa-envelope mr-2"></i>Email
+        </a>
+    </div>
 </div>

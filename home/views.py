@@ -10,6 +10,10 @@ from datetime import datetime
 from django.db import transaction
 from django.contrib.auth.models import User
 from django.contrib import messages
+
+def about(request):
+    return render(request, 'about.html')
+
 @csrf_protect
 def home(request):
     return render(request, 'index.html')

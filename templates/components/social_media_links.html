@@ -4,6 +4,6 @@
         {% include "components/social_media_link_list.html" %}
     </div>
     {% if request.user == profile.user %}
-        <button id="editLinks" class="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">Edit Links</button>
+        <button id="editLinks" class="mt-4 px-4 py-2 bg-blue-500 text-white rounded-full hover:bg-blue-600 transition duration-300">Edit Links</button>
     {% endif %}
 </div>

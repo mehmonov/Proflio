@@ -153,7 +153,7 @@ const editLinksModal = document.getElementById('editLinksModal');
 const editWebsiteStyleModal = document.getElementById('editWebsiteStyleModal');
 
 editLinksButton.addEventListener('click', function() {
-    openModal('editLinksModal');
+    document.getElementById('editLinksModal').style.display = 'block';
 });
 
 editWebsiteStyleButton.addEventListener('click', function() {
