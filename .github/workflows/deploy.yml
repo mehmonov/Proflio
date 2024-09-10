@@ -43,6 +43,8 @@ jobs:
             git pull origin main
           fi
           cd /home/${{ secrets.PROJECT_NAME }}
+          git fetch origin main
+          git reset --hard origin/main
           python3 -m venv venv
           source venv/bin/activate
           pip install --upgrade pip
