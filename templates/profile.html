@@ -36,6 +36,8 @@
             border-radius: 0.5rem;
         }
     </style>
+    <script src="{% static 'profile.js' %}"></script>
+
 </head>
 <body class="bg-gradient-to-br from-blue-600 to-blue-800 min-h-screen flex items-center justify-center p-4">
     <div class="container mx-auto max-w-4xl">
@@ -55,7 +57,6 @@
     {% include "modals/edit_links_modal.html" %}
     {% include "modals/edit_website_style_modal.html" %}
 
-    <script src="{% static 'profile.js' %}"></script>
     <script>
         function openModal(modalId) {
             document.getElementById(modalId).style.display = "flex";
