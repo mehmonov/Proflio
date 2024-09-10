@@ -2,53 +2,91 @@
 {% load socialaccount %}
 {% block content %}
 
-<section class="flex  flex-col items-center justify-center min-h-screen text-center">
-    <a href="https://www.producthunt.com/products/proflio/reviews?utm_source=badge-product_review&utm_medium=badge&utm_souce=badge-proflio" target="_blank"><img src="https://api.producthunt.com/widgets/embed-image/v1/product_review.svg?product_id=604877&theme=light" alt="Proflio - Build&#0032;your&#0032;online&#0032;profile&#0032;in&#0032;minutes&#0032;with&#0032;a&#0032;shareable&#0032;link | Product Hunt" style="width: 250px; height: 54px;" width="250" height="54" /></a> 
-    <h1 class="mt-5 text-4xl md:text-6xl font-bold mb-4">Show Your Work to the World master</h1>
-
-    <p class="text-lg md:text-2xl mb-8">An online portfolio creation and sharing platform for designers, developers, and others. Create and share your profile!</p>
-    <div class="flex space-x-4 mb-8">
-        {% if user.is_authenticated %}
-        <div>
-            <a href="{% url "mstep" %}" class="text-white bg-green-700 hover:bg-green-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                    Start here
-
-            </a>
-
-        </div>
-        <div>
-            <a href="{% url 'account_logout' %}" class="text-white bg-green-700 hover:bg-green-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                    Logout
-            </a>
-
-        </div>
-        {% else %}
-        <!-- GitHub button ends here -->
-        <div class="px-6 sm:px-0 max-w-sm">
-            <form action="{% provider_login_url 'google' %}" method="post">
-                {% csrf_token %}
-                <button type="submit"  class="text-white w-full  bg-gray-800 hover:bg-green-700 focus:ring-4 focus:outline-none focus:ring-[#4285F4]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center justify-between mr-2 mb-2"><svg class="w-4 h-4 me-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 19">
-                <path fill-rule="evenodd" d="M8.842 18.083a8.8 8.8 0 0 1-8.65-8.948 8.841 8.841 0 0 1 8.8-8.652h.153a8.464 8.464 0 0 1 5.7 2.257l-2.193 2.038A5.27 5.27 0 0 0 9.09 3.4a5.882 5.882 0 0 0-.2 11.76h.124a5.091 5.091 0 0 0 5.248-4.057L14.3 11H9V8h8.34c.066.543.095 1.09.088 1.636-.086 5.053-3.463 8.449-8.4 8.449l-.186-.002Z" clip-rule="evenodd"/>
-                </svg>Sign up with Google<div></div></d>
-            </form>
-        </div>
-
-        <div class="px-6 sm:px-0 max-w-sm">
-            <form action="{% provider_login_url 'github' %}" method="post">
-                {% csrf_token %}
-                <button type="submit"  class="text-white w-full  bg-gray-800 hover:bg-green-700 focus:ring-4 focus:outline-none focus:ring-[#4285F4]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center justify-between mr-2 mb-2"><svg class="w-4 h-4 me-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                <path fill-rule="evenodd" d="M10 .333A9.911 9.911 0 0 0 6.866 19.65c.5.092.678-.215.678-.477 0-.237-.01-1.017-.014-1.845-2.757.6-3.338-1.169-3.338-1.169a2.627 2.627 0 0 0-1.1-1.451c-.9-.615.07-.6.07-.6a2.084 2.084 0 0 1 1.518 1.021 2.11 2.11 0 0 0 2.884.823c.044-.503.268-.973.63-1.325-2.2-.25-4.516-1.1-4.516-4.9A3.832 3.832 0 0 1 4.7 7.068a3.56 3.56 0 0 1 .095-2.623s.832-.266 2.726 1.016a9.409 9.409 0 0 1 4.962 0c1.89-1.282 2.717-1.016 2.717-1.016.366.83.402 1.768.1 2.623a3.827 3.827 0 0 1 1.02 2.659c0 3.807-2.319 4.644-4.525 4.889a2.366 2.366 0 0 1 .673 1.834c0 1.326-.012 2.394-.012 2.72 0 .263.18.572.681.475A9.911 9.911 0 0 0 10 .333Z" clip-rule="evenodd"/>
-                </svg>Sign up with Github<div></div></>
-            </form>
-        </div>
-       
-
-        {% endif %}
-
+<header class="bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-500 text-white pt-32 pb-20 rounded-b-[50px] shadow-lg">
+    <div class="container mx-auto px-4 text-center">
+        <h1 class="text-5xl md:text-7xl font-extrabold mb-6 animate-pulse">Proflio</h1>
+        <p class="text-2xl md:text-3xl mb-10 animate-fade-in-up">Your work, your story, your digital showcase</p>
+        <a href="#get-started" class="bg-white text-purple-600 font-bold py-3 px-8 rounded-full text-xl hover:bg-purple-100 transition duration-300 shadow-md">Get Started</a>
     </div>
-    <div class="w-full max-w-xs">
+</header>
 
+<section class="py-20 bg-gray-100 rounded-t-[50px] rounded-b-[50px] -mt-10 relative z-10 shadow-lg">
+    <div class="container mx-auto px-4">
+        <h2 class="text-4xl font-bold text-center mb-12 text-gray-800">Why Choose Proflio?</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+            <div class="bg-white p-8 rounded-3xl shadow-lg text-center transform hover:scale-105 transition duration-300">
+                <div class="text-5xl mb-4 text-indigo-500">🚀</div>
+                <h3 class="text-2xl font-semibold mb-4">Quick Setup</h3>
+                <p class="text-gray-600">Create your stunning portfolio in minutes, not hours.</p>
+            </div>
+            <div class="bg-white p-8 rounded-3xl shadow-lg text-center transform hover:scale-105 transition duration-300">
+                <div class="text-5xl mb-4 text-purple-500">🎨</div>
+                <h3 class="text-2xl font-semibold mb-4">Beautiful Designs</h3>
+                <p class="text-gray-600">Choose from a variety of professional templates.</p>
+            </div>
+            <div class="bg-white p-8 rounded-3xl shadow-lg text-center transform hover:scale-105 transition duration-300">
+                <div class="text-5xl mb-4 text-pink-500">🌐</div>
+                <h3 class="text-2xl font-semibold mb-4">Easy Sharing</h3>
+                <p class="text-gray-600">Share your work with a simple, customizable link.</p>
+            </div>
+        </div>
     </div>
 </section>
+
+<section class="py-20 bg-gradient-to-r from-blue-500 to-teal-400 text-white rounded-t-[50px] rounded-b-[50px] -mt-10 relative z-20 shadow-lg">
+    <div class="container mx-auto px-4 text-center">
+        <h2 class="text-4xl font-bold mb-8">Showcase Your Talents</h2>
+        <p class="text-xl mb-12 max-w-2xl mx-auto">Whether you're a designer, developer, writer, or creative professional, Proflio helps you stand out in a crowded digital landscape.</p>
+        <div class="flex flex-wrap justify-center gap-6">
+            <div class="bg-white text-blue-500 rounded-full py-2 px-6 font-semibold shadow-md hover:shadow-lg transition duration-300">Web Design</div>
+            <div class="bg-white text-teal-500 rounded-full py-2 px-6 font-semibold shadow-md hover:shadow-lg transition duration-300">Photography</div>
+            <div class="bg-white text-indigo-500 rounded-full py-2 px-6 font-semibold shadow-md hover:shadow-lg transition duration-300">Illustration</div>
+            <div class="bg-white text-purple-500 rounded-full py-2 px-6 font-semibold shadow-md hover:shadow-lg transition duration-300">UX/UI Design</div>
+            <div class="bg-white text-pink-500 rounded-full py-2 px-6 font-semibold shadow-md hover:shadow-lg transition duration-300">Content Writing</div>
+        </div>
+    </div>
+</section>
+
+<section id="get-started" class="py-20 bg-gray-50 rounded-t-[50px] -mt-10 relative z-30 shadow-lg">
+    <div class="container mx-auto px-4 text-center">
+        <h2 class="text-4xl font-bold mb-12 text-gray-800">Get Started Today</h2>
+        <div class="flex flex-col md:flex-row justify-center space-y-4 md:space-y-0 md:space-x-4">
+            {% if user.is_authenticated %}
+            <a href="{% url "mstep" %}" class="bg-indigo-600 text-white font-bold py-3 px-8 rounded-full hover:bg-indigo-700 transition duration-300 shadow-md">Start Creating</a>
+            <a href="{% url 'account_logout' %}" class="bg-gray-200 text-gray-700 font-bold py-3 px-8 rounded-full hover:bg-gray-300 transition duration-300 shadow-md">Logout</a>
+            {% else %}
+            <form action="{% provider_login_url 'google' %}" method="post" class="w-full md:w-auto">
+                {% csrf_token %}
+                <button type="submit" class="bg-white text-gray-700 font-bold py-3 px-8 rounded-full border border-gray-300 hover:bg-gray-100 transition duration-300 flex items-center justify-center w-full shadow-md">
+                    <svg class="w-5 h-5 mr-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 19">
+                        <path fill-rule="evenodd" d="M8.842 18.083a8.8 8.8 0 0 1-8.65-8.948 8.841 8.841 0 0 1 8.8-8.652h.153a8.464 8.464 0 0 1 5.7 2.257l-2.193 2.038A5.27 5.27 0 0 0 9.09 3.4a5.882 5.882 0 0 0-.2 11.76h.124a5.091 5.091 0 0 0 5.248-4.057L14.3 11H9V8h8.34c.066.543.095 1.09.088 1.636-.086 5.053-3.463 8.449-8.4 8.449l-.186-.002Z" clip-rule="evenodd"/>
+                    </svg>
+                    Sign up with Google
+                </button>
+            </form>
+            <form action="{% provider_login_url 'github' %}" method="post" class="w-full md:w-auto">
+                {% csrf_token %}
+                <button type="submit" class="bg-gray-800 text-white font-bold py-3 px-8 rounded-full hover:bg-gray-900 transition duration-300 flex items-center justify-center w-full shadow-md">
+                    <svg class="w-5 h-5 mr-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M10 .333A9.911 9.911 0 0 0 6.866 19.65c.5.092.678-.215.678-.477 0-.237-.01-1.017-.014-1.845-2.757.6-3.338-1.169-3.338-1.169a2.627 2.627 0 0 0-1.1-1.451c-.9-.615.07-.6.07-.6a2.084 2.084 0 0 1 1.518 1.021 2.11 2.11 0 0 0 2.884.823c.044-.503.268-.973.63-1.325-2.2-.25-4.516-1.1-4.516-4.9A3.832 3.832 0 0 1 4.7 7.068a3.56 3.56 0 0 1 .095-2.623s.832-.266 2.726 1.016a9.409 9.409 0 0 1 4.962 0c1.89-1.282 2.717-1.016 2.717-1.016.366.83.402 1.768.1 2.623a3.827 3.827 0 0 1 1.02 2.659c0 3.807-2.319 4.644-4.525 4.889a2.366 2.366 0 0 1 .673 1.834c0 1.326-.012 2.394-.012 2.72 0 .263.18.572.681.475A9.911 9.911 0 0 0 10 .333Z" clip-rule="evenodd"/>
+                    </svg>
+                    Sign up with Github
+                </button>
+            </form>
+            {% endif %}
+        </div>
+    </div>
+</section>
+
+<footer class="bg-gray-800 text-white py-10 rounded-t-[50px]">
+    <div class="container mx-auto px-4 text-center">
+        <p class="mb-4">&copy; 2023 Proflio. All rights reserved.</p>
+        <div class="flex justify-center space-x-4">
+            <a href="#" class="hover:text-gray-300 transition duration-300">Terms of Service</a>
+            <a href="#" class="hover:text-gray-300 transition duration-300">Privacy Policy</a>
+            <a href="#" class="hover:text-gray-300 transition duration-300">Contact Us</a>
+        </div>
+    </div>
+</footer>
 
 {% endblock content %}
