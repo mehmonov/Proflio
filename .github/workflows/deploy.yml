@@ -4,10 +4,14 @@ on:
   push:
     branches:
       - main
+  pull_request:
+    types:
+      - closed
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    if: github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.pull_request.merged == true)
     steps:
     - uses: actions/checkout@v2
 
@@ -55,5 +59,5 @@ jobs:
           sudo apt-get install -y $(cat requirements_server.txt | cut -d'=' -f1)
           python manage.py migrate
           python manage.py collectstatic --noinput
-          sudo supervisorctl restart ${{ secrets.PROJECT_NAME }}
+          sudo supervisorctl restart all
           sudo systemctl reload nginx

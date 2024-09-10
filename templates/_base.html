@@ -49,11 +49,18 @@
         {% block content %} {% endblock content %}
 
         <script src="https://cdn.jsdelivr.net/npm/flowbite@2.4.1/dist/flowbite.min.js"></script>
+
+       <script
+            defer
+            src="https://static.cloudflareinsights.com/beacon.min.js"
+            data-cf-beacon='{"token": "4358c14e0dad434fa919137cd37c230c"}'
+        ></script>
         <script>
             // Mobile menu toggle
             document.getElementById('mobile-menu-button').addEventListener('click', function() {
                 document.getElementById('mobile-menu').classList.toggle('hidden');
             });
         </script>
+
     </body>
 </html>
