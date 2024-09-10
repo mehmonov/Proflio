@@ -22,7 +22,10 @@
             height: 100%;
             overflow: auto;
             background-color: rgba(0,0,0,0.4);
+            align-items: center;
+            justify-content: center;
         }
+        
         .modal-content {
             background-color: #2d3748;
             margin: 15% auto;
@@ -53,5 +56,33 @@
     {% include "modals/edit_website_style_modal.html" %}
 
     <script src="{% static 'profile.js' %}"></script>
+    <script>
+        function openModal(modalId) {
+            document.getElementById(modalId).style.display = "flex";
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = "none";
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const editButtons = {
+                'editUserInfo': 'editUserInfoModal',
+                'editSkills': 'editSkillsModal',
+                'editExperience': 'editExperienceModal',
+                'editLinks': 'editLinksModal',
+                'editWebsiteStyle': 'editWebsiteStyleModal'
+            };
+
+            for (const [buttonId, modalId] of Object.entries(editButtons)) {
+                const button = document.getElementById(buttonId);
+                if (button) {
+                    button.addEventListener('click', function() {
+                        openModal(modalId);
+                    });
+                }
+            }
+        });
+    </script>
 </body>
 </html>
