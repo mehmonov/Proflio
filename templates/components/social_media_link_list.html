@@ -1,0 +1,66 @@
+{% if profile.user.links %}
+    {% with links=profile.user.links %}
+        {% if links.telegram_username %}
+            <div class="flex items-center mb-2">
+                <i class="fab fa-telegram text-blue-500 mr-2"></i>
+                <a href="https://t.me/{{ links.telegram_username }}" target="_blank" class="text-blue-500 hover:underline">{{ links.telegram_username }}</a>
+            </div>
+        {% endif %}
+        {% if links.instagram_username %}
+            <div class="flex items-center mb-2">
+                <i class="fab fa-instagram text-pink-500 mr-2"></i>
+                <a href="https://instagram.com/{{ links.instagram_username }}" target="_blank" class="text-blue-500 hover:underline">{{ links.instagram_username }}</a>
+            </div>
+        {% endif %}
+        {% if links.facebook_username %}
+            <div class="flex items-center mb-2">
+                <i class="fab fa-facebook text-blue-600 mr-2"></i>
+                <a href="https://facebook.com/{{ links.facebook_username }}" target="_blank" class="text-blue-500 hover:underline">{{ links.facebook_username }}</a>
+            </div>
+        {% endif %}
+        {% if links.twitter_username %}
+            <div class="flex items-center mb-2">
+                <i class="fab fa-twitter text-blue-400 mr-2"></i>
+                <a href="https://twitter.com/{{ links.twitter_username }}" target="_blank" class="text-blue-500 hover:underline">{{ links.twitter_username }}</a>
+            </div>
+        {% endif %}
+        {% if links.linkedin_username %}
+            <div class="flex items-center mb-2">
+                <i class="fab fa-linkedin text-blue-700 mr-2"></i>
+                <a href="https://linkedin.com/in/{{ links.linkedin_username }}" target="_blank" class="text-blue-500 hover:underline">{{ links.linkedin_username }}</a>
+            </div>
+        {% endif %}
+        {% if links.youtube_username %}
+            <div class="flex items-center mb-2">
+                <i class="fab fa-youtube text-red-500 mr-2"></i>
+                <a href="https://youtube.com/{{ links.youtube_username }}" target="_blank" class="text-blue-500 hover:underline">{{ links.youtube_username }}</a>
+            </div>
+        {% endif %}
+        {% if links.tiktok_username %}
+            <div class="flex items-center mb-2">
+                <i class="fab fa-tiktok text-black mr-2"></i>
+                <a href="https://tiktok.com/@{{ links.tiktok_username }}" target="_blank" class="text-blue-500 hover:underline">{{ links.tiktok_username }}</a>
+            </div>
+        {% endif %}
+        {% if links.whatsapp_username %}
+            <div class="flex items-center mb-2">
+                <i class="fab fa-whatsapp text-green-500 mr-2"></i>
+                <a href="https://wa.me/{{ links.whatsapp_username }}" target="_blank" class="text-blue-500 hover:underline">{{ links.whatsapp_username }}</a>
+            </div>
+        {% endif %}
+        {% if links.github_username %}
+            <div class="flex items-center mb-2">
+                <i class="fab fa-github text-gray-800 mr-2"></i>
+                <a href="https://github.com/{{ links.github_username }}" target="_blank" class="text-blue-500 hover:underline">{{ links.github_username }}</a>
+            </div>
+        {% endif %}
+        {% if links.project_url %}
+            <div class="flex items-center mb-2">
+                <i class="fas fa-link text-gray-600 mr-2"></i>
+                <a href="{{ links.project_url }}" target="_blank" class="text-blue-500 hover:underline">Project URL</a>
+            </div>
+        {% endif %}
+    {% endwith %}
+{% else %}
+    <p class="text-gray-500">No social media links added yet.</p>
+{% endif %}

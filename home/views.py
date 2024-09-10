@@ -226,29 +226,16 @@ def update_links(request):
         user = request.user
         link, created = Link.objects.get_or_create(user=user)
         
-        # Debug uchun
-        print("POST data:", request.POST)
+        platforms = request.POST.getlist('platforms[]')
+        usernames = request.POST.getlist('usernames[]')
         
-        platforms = [
-            'telegram', 'instagram', 'facebook', 'twitter', 'linkedin',
-            'youtube', 'tiktok', 'whatsapp', 'github'
-        ]
-        
-        for platform in platforms:
-            username = request.POST.get(f"{platform}_username")
-            if username is not None:
-                setattr(link, f"{platform}_username", username.strip() or None)
-                # Debug uchun
-                print(f"Setting {platform}_username to: {username.strip() or None}")
-        
-        # Update project URL
-        project_url = request.POST.get("project_url")
-        if project_url is not None:
-            link.project_url = project_url.strip() or None
+        for platform, username in zip(platforms, usernames):
+            if platform and username:
+                setattr(link, f"{platform}_username", username.strip())
+            else:
+                setattr(link, f"{platform}_username", None)
         
         link.save()
-        # Debug uchun
-        print("Saved link object:", link.__dict__)
         
         messages.success(request, 'Social media links updated successfully!')
         

@@ -1,0 +1,13 @@
+<div class="px-4 sm:px-8 pb-8">
+    <h2 class="text-2xl font-bold text-white mb-4">Skills</h2>
+    <div class="flex flex-wrap gap-2">
+        {% for skill in profile.user.skills.all %}
+            <span class="px-3 py-1 bg-blue-500 text-white rounded-full">{{ skill.title }}</span>
+        {% empty %}
+            <p class="text-gray-300">No skills added yet.</p>
+        {% endfor %}
+    </div>
+    {% if request.user == profile.user %}
+        <button id="editSkills" class="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">Edit Skills</button>
+    {% endif %}
+</div>

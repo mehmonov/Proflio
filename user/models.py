@@ -31,7 +31,7 @@ class Skills(models.Model):
         return self.title
     
 class Link(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='links')
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='links')
     telegram_username = models.CharField(max_length=255, blank=True, null=True)
     instagram_username = models.CharField(max_length=255, blank=True, null=True)
     facebook_username = models.CharField(max_length=255, blank=True, null=True)

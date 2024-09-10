@@ -1,0 +1,9 @@
+<div class="px-4 sm:px-8 pb-8">
+    <h2 class="text-2xl font-bold text-white mb-4">Social Media Links</h2>
+    <div id="socialMediaLinks" class="space-y-3">
+        {% include "components/social_media_link_list.html" %}
+    </div>
+    {% if request.user == profile.user %}
+        <button id="editLinks" class="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">Edit Links</button>
+    {% endif %}
+</div>
