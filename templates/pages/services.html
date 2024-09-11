@@ -1,0 +1,94 @@
+{% extends "_base.html" %}
+{% block bgcolor %}
+bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-500 text-white pt-32 pb-20 rounded-b-[50px] shadow-lg
+{% endblock bgcolor %}
+{% block content %}
+<section class="bg-white py-16 w-4/5  mx-auto  rounded-xl">
+    <div class="container mx-auto px-5">
+        <h2 class="text-4xl font-semibold text-center text-gray-900 mb-6">Our Services</h2>
+        <p class="text-lg text-gray-600 text-center max-w-2xl mx-auto mb-12">
+            At Proflio, we provide a wide range of services that help you create, manage, and enhance your digital portfolio, ensuring you stand out in a competitive marketplace.
+        </p>
+
+        <!-- Services Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <!-- Service 1 -->
+            <div class="bg-gray-50 p-6 rounded-lg shadow-lg">
+                <div class="mb-4 text-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-16 h-16 text-blue-600 mx-auto">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 20l9-4.5V8l-9 4.5L3 8v7.5L12 20z" />
+                    </svg>
+                </div>
+                <h3 class="text-2xl font-bold mb-4 text-center">Portfolio Creation</h3>
+                <p class="text-gray-600 text-center">
+                    We offer powerful tools that make creating a stunning portfolio fast, simple, and intuitive.
+                </p>
+            </div>
+            <!-- Service 2 -->
+            <div class="bg-gray-50 p-6 rounded-lg shadow-lg">
+                <div class="mb-4 text-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-16 h-16 text-blue-600 mx-auto">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16V6a1 1 0 00-.293-.707l-9-9a1 1 0 10-1.414 1.414l9 9A1 1 0 0012 8v8l9 4v-8l-9-4V5a1 1 0 00-2 0v2l9 4v9a1 1 0 001 1h1a1 1 0 001-1v-9a1 1 0 00-.293-.707l-9-9a1 1 0 10-1.414 1.414l9 9A1 1 0 0012 8v8a1 1 0 001 1z" />
+                    </svg>
+                </div>
+                <h3 class="text-2xl font-bold mb-4 text-center">Customizable Templates</h3>
+                <p class="text-gray-600 text-center">
+                    Choose from a variety of fully customizable templates to fit your personal or professional brand.
+                </p>
+            </div>
+            <!-- Service 3 -->
+            <div class="bg-gray-50 p-6 rounded-lg shadow-lg">
+                <div class="mb-4 text-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-16 h-16 text-blue-600 mx-auto">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 17l-4-4-4 4m0-8l4-4 4 4M12 4v16" />
+                    </svg>
+                </div>
+                <h3 class="text-2xl font-bold mb-4 text-center">SEO Optimization</h3>
+                <p class="text-gray-600 text-center">
+                    Our portfolios are SEO optimized, ensuring that your work gets seen by the right people.
+                </p>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-8">
+            <!-- Service 4 -->
+            <div class="bg-gray-50 p-6 rounded-lg shadow-lg">
+                <div class="mb-4 text-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-16 h-16 text-blue-600 mx-auto">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 20l-9-4.5V8L12 12.5l9-4.5v7.5L12 20z" />
+                    </svg>
+                </div>
+                <h3 class="text-2xl font-bold mb-4 text-center">Analytics Dashboard</h3>
+                <p class="text-gray-600 text-center">
+                    Get insights into your portfolio’s performance with our built-in analytics tools.
+                </p>
+            </div>
+            <!-- Service 5 -->
+            <div class="bg-gray-50 p-6 rounded-lg shadow-lg">
+                <div class="mb-4 text-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-16 h-16 text-blue-600 mx-auto">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 12h12M6 12l6-6m-6 6l6 6" />
+                    </svg>
+                </div>
+                <h3 class="text-2xl font-bold mb-4 text-center">Fast Hosting</h3>
+                <p class="text-gray-600 text-center">
+                    Enjoy blazing fast hosting for your portfolio with 99.9% uptime and global availability.
+                </p>
+            </div>
+            <!-- Service 6 -->
+            <div class="bg-gray-50 p-6 rounded-lg shadow-lg">
+                <div class="mb-4 text-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-16 h-16 text-blue-600 mx-auto">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                </div>
+                <h3 class="text-2xl font-bold mb-4 text-center">Secure Platform</h3>
+                <p class="text-gray-600 text-center">
+                    Our platform offers top-tier security, ensuring your portfolio is safe from unauthorized access.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock content %}

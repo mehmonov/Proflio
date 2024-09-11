@@ -1,0 +1,40 @@
+{% extends "_base.html" %}
+{% block bgcolor %}
+bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-500 text-white pt-32 pb-20 rounded-b-[50px] shadow-lg
+{% endblock bgcolor %}
+{% block content %}
+
+<section class="w-4/5  mx-auto bg-white py-16 rounded-xl">
+    <div class="container mx-auto px-5">
+        <h2 class="text-4xl font-semibold text-center text-gray-900 mb-6">About Us</h2>
+        <p class="text-lg text-gray-600 text-center max-w-2xl mx-auto mb-12">
+            At Proflio, we believe that your work deserves the best digital showcase. We empower creators, developers, designers, and all professionals to present their portfolios beautifully and effortlessly. Our platform allows you to stand out in a crowded digital world.
+        </p>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+            <!-- Card 1 -->
+            <div class="bg-gray-50 p-6 rounded-lg shadow-lg">
+                <h3 class="text-2xl font-bold mb-4">Our Mission</h3>
+                <p class="text-gray-600">
+                    To provide a user-friendly platform that makes portfolio creation seamless and accessible to all.
+                </p>
+            </div>
+            <!-- Card 2 -->
+            <div class="bg-gray-50 p-6 rounded-lg shadow-lg">
+                <h3 class="text-2xl font-bold mb-4">Our Vision</h3>
+                <p class="text-gray-600">
+                    We envision a world where everyone can showcase their talents in a way that reflects their true potential.
+                </p>
+            </div>
+            <!-- Card 3 -->
+            <div class="bg-gray-50 p-6 rounded-lg shadow-lg">
+                <h3 class="text-2xl font-bold mb-4">Our Values</h3>
+                <p class="text-gray-600">
+                    Simplicity, creativity, and innovation are at the heart of everything we do.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock content %}
+
+

@@ -1,17 +1,19 @@
 from django.contrib import admin
 from django.urls import include, path
-from home.views import home, mstep, profile, update_user_info, update_skills, update_company, update_links, update_website_style, about
+from home.views import home, mstep, profile, update_user_info, update_skills, update_company, update_links, update_website_style, about, servis, pricing, contact
 from django.conf import settings
 from django.conf.urls.static import static
-def trigger_error(request):
-    division_by_zero = 1 / 0
 
 urlpatterns = [
-    path('sentry-debug/', trigger_error),
     path('accounts/', include('allauth.urls')),
     path('admin/', admin.site.urls),
     path('', home, name='home'),
     path('about/', about, name='about'),
+    path('servis/', servis, name='servis'),
+    path('pricing/', pricing, name='pricing'),
+    path('contact/', contact, name='contact'),
+    
+    
     path('mstep', mstep, name='mstep'),
     path('c/<str:username>', profile, name='profile'),
     path('update-user-info/', update_user_info, name='update_user_info'),

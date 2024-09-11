@@ -12,7 +12,13 @@ from django.contrib.auth.models import User
 from django.contrib import messages
 
 def about(request):
-    return render(request, 'about.html')
+    return render(request, 'pages/about.html')
+def servis(request):
+    return render(request, 'pages/services.html')
+def pricing(request):
+    return render(request, 'pages/pricing.html')
+def contact(request):
+    return render(request, 'pages/contact.html')
 
 @csrf_protect
 def home(request):
@@ -30,7 +36,7 @@ def profile(request, username):
         return render(request, 'profile.html', {'profile': user.profile})
     else:
         # Render a different template for other users
-        return render(request, 'public_profile.html', {'profile': user.profile})
+        return render(request, 'pages/public_profile.html', {'profile': user.profile})
 
 @csrf_protect
 @login_required
@@ -41,9 +47,9 @@ def mstep(request):
             if user.profile:
                 return redirect('profile', user.username)
             else:
-                return render(request, 'multistep.html')
+                return render(request, 'pages/multistep.html')
         except Exception as e:
-            return render(request, 'multistep.html')
+            return render(request, 'pages/multistep.html')
 
     elif request.method == 'POST':
         try:
