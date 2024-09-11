@@ -23,14 +23,14 @@ def profile(request, username):
     if user is None:
         return redirect('home')
     
-    profile = user.profile
+
     
     # Check if the logged-in user is viewing their own profile
     if request.user == user:
-        return render(request, 'profile.html', {'profile': profile})
+        return render(request, 'profile.html', {'profile': user.profile})
     else:
         # Render a different template for other users
-        return render(request, 'public_profile.html', {'profile': profile})
+        return render(request, 'public_profile.html', {'profile': user.profile})
 
 @csrf_protect
 @login_required
