@@ -181,3 +181,74 @@ function addLinkField() {
         }
     });
 });
+
+document.addEventListener('DOMContentLoaded', function() {
+    const addLinkBtn = document.getElementById('addLinkBtn');
+    const linkFields = document.getElementById('linkFields');
+
+    if (addLinkBtn) {
+        addLinkBtn.addEventListener('click', addNewLinkField);
+    }
+
+    function addNewLinkField() {
+        const newField = document.createElement('div');
+        newField.className = 'flex items-center space-x-2 mb-4';
+        newField.innerHTML = `
+            <select name="link_types" class="flex-grow bg-gray-700 border border-gray-600 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500">
+                <option value="">Select platform</option>
+                <option value="telegram">Telegram</option>
+                <option value="instagram">Instagram</option>
+                <option value="facebook">Facebook</option>
+                <option value="twitter">Twitter</option>
+                <option value="linkedin">LinkedIn</option>
+                <option value="youtube">YouTube</option>
+                <option value="tiktok">TikTok</option>
+                <option value="whatsapp">WhatsApp</option>
+                <option value="github">GitHub</option>
+                <option value="project_url">Project URL</option>
+            </select>
+            <input type="url" name="link_urls" placeholder="https://" class="flex-grow bg-gray-700 border border-gray-600 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500">
+            <button type="button" onclick="removeLink(this)" class="px-2 py-1 bg-red-500 text-white rounded-full hover:bg-red-600">Remove</button>
+        `;
+        linkFields.appendChild(newField);
+    }
+
+    // Load existing links when the modal is opened
+    const editLinksButton = document.getElementById('editLinks');
+    if (editLinksButton) {
+        editLinksButton.addEventListener('click', loadExistingLinks);
+    }
+
+    function loadExistingLinks() {
+        // Clear existing fields
+        linkFields.innerHTML = '';
+
+        // Add fields for existing links
+        // This is a placeholder - you'll need to replace this with actual data from your backend
+        const existingLinks = [
+            { type: 'telegram', url: 'https://t.me/username' },
+            { type: 'instagram', url: 'https://instagram.com/username' },
+            // Add more existing links here
+        ];
+
+        existingLinks.forEach(link => {
+            const newField = document.createElement('div');
+            newField.className = 'flex items-center space-x-2 mb-4';
+            newField.innerHTML = `
+                <select name="link_types" class="flex-grow bg-gray-700 border border-gray-600 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500">
+                    <option value="">Select platform</option>
+                    <option value="telegram" ${link.type === 'telegram' ? 'selected' : ''}>Telegram</option>
+                    <option value="instagram" ${link.type === 'instagram' ? 'selected' : ''}>Instagram</option>
+                    <!-- Add more options here -->
+                </select>
+                <input type="url" name="link_urls" value="${link.url}" class="flex-grow bg-gray-700 border border-gray-600 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500">
+                <button type="button" onclick="removeLink(this)" class="px-2 py-1 bg-red-500 text-white rounded-full hover:bg-red-600">Remove</button>
+            `;
+            linkFields.appendChild(newField);
+        });
+    }
+});
+
+function removeLink(button) {
+    button.closest('div').remove();
+}

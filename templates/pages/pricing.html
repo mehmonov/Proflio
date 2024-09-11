@@ -1,0 +1,102 @@
+{% extends "_base.html" %}
+
+{% block bgcolor %}
+bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-500 text-white pt-32 pb-20 rounded-b-[50px] shadow-lg
+{% endblock bgcolor %}
+
+
+
+{% block content %}
+<section class="w-1/2 container mx-auto bg-white py-16 rounded-xl">
+    <div class="container mx-auto px-5">
+        <h2 class="text-4xl font-semibold text-center text-gray-900 mb-6">Pricing Plans</h2>
+        <p class="text-lg text-gray-600 text-center max-w-2xl mx-auto mb-12">
+            Choose the perfect plan that suits your needs. We offer competitive pricing for individuals and businesses alike.
+        </p>
+
+        <!-- Pricing Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <!-- Basic Plan -->
+            <div class="bg-gray-50 p-6 rounded-lg shadow-lg">
+                <h3 class="text-2xl font-bold mb-4 text-center text-blue-600">Basic Plan</h3>
+                <p class="text-center text-gray-600 mb-6">$0 / month</p>
+                <ul class="text-gray-600 mb-6">
+                    <li class="flex items-center mb-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-600 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm4.292-8.707a1 1 0 00-1.414 0L9 13.172l-1.879-1.88a1 1 0 00-1.414 1.415l2.586 2.586a1 1 0 001.414 0l4.586-4.586a1 1 0 000-1.414z" clip-rule="evenodd" />
+                        </svg>
+                        1 Projects
+                    </li>
+                    <li class="flex items-center mb-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-600 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm4.292-8.707a1 1 0 00-1.414 0L9 13.172l-1.879-1.88a1 1 0 00-1.414 1.415l2.586 2.586a1 1 0 001.414 0l4.586-4.586a1 1 0 000-1.414z" clip-rule="evenodd" />
+                        </svg>
+                        Basic Support
+                    </li>
+                   
+                </ul>
+                <div class="text-center">
+                    <a href="#" class="bg-blue-600 text-white py-2 px-6 rounded-lg hover:bg-blue-500 transition-colors">Choose Plan</a>
+                </div>
+            </div>
+
+            <!-- Standard Plan -->
+            <div class="bg-gray-50 p-6 rounded-lg shadow-lg">
+                <h3 class="text-2xl font-bold mb-4 text-center text-blue-600">Standard Plan</h3>
+                <p class="text-center text-gray-600 mb-6">$29.99 / month</p>
+                <ul class="text-gray-600 mb-6">
+                    <li class="flex items-center mb-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-600 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm4.292-8.707a1 1 0 00-1.414 0L9 13.172l-1.879-1.88a1 1 0 00-1.414 1.415l2.586 2.586a1 1 0 001.414 0l4.586-4.586a1 1 0 000-1.414z" clip-rule="evenodd" />
+                        </svg>
+                        15 Projects
+                    </li>
+                    <li class="flex items-center mb-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-600 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm4.292-8.707a1 1 0 00-1.414 0L9 13.172l-1.879-1.88a1 1 0 00-1.414 1.415l2.586 2.586a1 1 0 001.414 0l4.586-4.586a1 1 0 000-1.414z" clip-rule="evenodd" />
+                        </svg>
+                        Priority Support
+                    </li>
+                    <li class="flex items-center mb-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-600 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm4.292-8.707a1 1 0 00-1.414 0L9 13.172l-1.879-1.88a1 1 0 00-1.414 1.415l2.586 2.586a1 1 0 001.414 0l4.586-4.586a1 1 0 000-1.414z" clip-rule="evenodd" />
+                        </svg>
+                        50 GB Storage
+                    </li>
+                </ul>
+                <div class="text-center">
+                    <a href="#" class="bg-blue-600 text-white py-2 px-6 rounded-lg hover:bg-blue-500 transition-colors">Choose Plan</a>
+                </div>
+            </div>
+            <div class="bg-gray-50 p-6 rounded-lg shadow-lg">
+                <h3 class="text-2xl font-bold mb-4 text-center text-blue-600">Premium Plan</h3>
+                <p class="text-center text-gray-600 mb-6">$29.99 / month</p>
+                <ul class="text-gray-600 mb-6">
+                    <li class="flex items-center mb-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-600 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm4.292-8.707a1 1 0 00-1.414 0L9 13.172l-1.879-1.88a1 1 0 00-1.414 1.415l2.586 2.586a1 1 0 001.414 0l4.586-4.586a1 1 0 000-1.414z" clip-rule="evenodd" />
+                        </svg>
+                        15 Projects
+                    </li>
+                    <li class="flex items-center mb-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-600 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm4.292-8.707a1 1 0 00-1.414 0L9 13.172l-1.879-1.88a1 1 0 00-1.414 1.415l2.586 2.586a1 1 0 001.414 0l4.586-4.586a1 1 0 000-1.414z" clip-rule="evenodd" />
+                        </svg>
+                        Priority Support
+                    </li>
+                    <li class="flex items-center mb-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-600 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm4.292-8.707a1 1 0 00-1.414 0L9 13.172l-1.879-1.88a1 1 0 00-1.414 1.415l2.586 2.586a1 1 0 001.414 0l4.586-4.586a1 1 0 000-1.414z" clip-rule="evenodd" />
+                        </svg>
+                        50 GB Storage
+                    </li>
+                </ul>
+                <div class="text-center">
+                    <a href="#" class="bg-blue-600 text-white py-2 px-6 rounded-lg hover:bg-blue-500 transition-colors">Choose Plan</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock content %}

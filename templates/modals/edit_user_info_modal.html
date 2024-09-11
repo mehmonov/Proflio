@@ -1,5 +1,5 @@
-<div id="editUserInfoModal" class="fixed inset-0 bg-gray-900 bg-opacity-50 hidden items-center justify-center z-50">
-    <div class="bg-gray-800 p-8 rounded-lg max-w-md w-full text-white">
+<div id="editUserInfoModal" class="modal">
+    <div class="modal-content bg-gray-800 text-white p-6 rounded-lg max-w-md w-full">
         <h3 class="text-2xl font-bold mb-6">Edit User Information</h3>
         <form id="userInfoForm" action="{% url 'update_user_info' %}" method="POST">
             {% csrf_token %}

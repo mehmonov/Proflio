@@ -10,7 +10,7 @@
     {% endif %}
     <div class="flex justify-center gap-4 mb-8">
         {% if profile.phone_number %}
-        <a href="tel:{{ profile.user.phone_number }}" class="px-6 py-2 bg-gray-800 text-gray-300 rounded-full hover:bg-gray-700 transition duration-300">
+        <a href="tel:{{ profile.phone_number }}" class="px-6 py-2 bg-gray-800 text-gray-300 rounded-full hover:bg-gray-700 transition duration-300">
             <i class="fas fa-phone-alt mr-2"></i>Call
         </a>
         {% endif %}

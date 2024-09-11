@@ -1,6 +1,3 @@
-
-
-
 from pathlib import Path
 import os
 
@@ -20,9 +17,6 @@ sentry_sdk.init(
     profiles_sample_rate=1.0,
 )
 
-
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-w2t9w*&jcj&_$im2tyjnib7sosh#ve@lp&&2+mq!dn3arh0=q*'

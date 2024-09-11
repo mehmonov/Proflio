@@ -22,7 +22,10 @@
             height: 100%;
             overflow: auto;
             background-color: rgba(0,0,0,0.4);
+            align-items: center;
+            justify-content: center;
         }
+        
         .modal-content {
             background-color: #2d3748;
             margin: 15% auto;
@@ -33,6 +36,8 @@
             border-radius: 0.5rem;
         }
     </style>
+    <script src="{% static 'profile.js' %}"></script>
+
 </head>
 <body class="bg-gradient-to-br from-blue-600 to-blue-800 min-h-screen flex items-center justify-center p-4">
     <div class="container mx-auto max-w-4xl">
@@ -52,6 +57,33 @@
     {% include "modals/edit_links_modal.html" %}
     {% include "modals/edit_website_style_modal.html" %}
 
-    <script src="{% static 'profile.js' %}"></script>
+    <script>
+        function openModal(modalId) {
+            document.getElementById(modalId).style.display = "flex";
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = "none";
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const editButtons = {
+                'editUserInfo': 'editUserInfoModal',
+                'editSkills': 'editSkillsModal',
+                'editExperience': 'editExperienceModal',
+                'editLinks': 'editLinksModal',
+                'editWebsiteStyle': 'editWebsiteStyleModal'
+            };
+
+            for (const [buttonId, modalId] of Object.entries(editButtons)) {
+                const button = document.getElementById(buttonId);
+                if (button) {
+                    button.addEventListener('click', function() {
+                        openModal(modalId);
+                    });
+                }
+            }
+        });
+    </script>
 </body>
 </html>
