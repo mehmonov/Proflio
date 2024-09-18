@@ -16,6 +16,8 @@
         {% compress css %}
         <link rel="stylesheet" href="{% static 'src/output.css' %}" />
         {% endcompress %}
+
+
     </head>
 
     <body class=" {% block bgcolor %} bg-gray-50{% endblock bgcolor %}">
@@ -67,5 +69,8 @@
             });
         </script>
 
+
+      <script src="{% static "profile.js" %}"></script>
+      <script src="{% static "script.js" %}"></script>
     </body>
 </html>
