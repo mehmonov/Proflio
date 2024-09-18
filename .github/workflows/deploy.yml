@@ -27,7 +27,6 @@ jobs:
         pip install Cython
         pip install -r requirements.txt
 
-
     - name: Deploy to server
       uses: appleboy/ssh-action@master
       with:
