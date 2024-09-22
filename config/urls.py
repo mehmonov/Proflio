@@ -12,8 +12,7 @@ urlpatterns = [
     path('servis/', servis, name='servis'),
     path('pricing/', pricing, name='pricing'),
     path('contact/', contact, name='contact'),
-    
-    
+
     path('mstep', mstep, name='mstep'),
     path('c/<str:username>', profile, name='profile'),
     path('update-user-info/', update_user_info, name='update_user_info'),
