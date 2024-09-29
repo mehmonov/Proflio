@@ -20,6 +20,24 @@ def pricing(request):
 def contact(request):
     return render(request, 'pages/contact.html')
 
+from django.http import JsonResponse
+from django.views.decorators.http import require_GET
+from user.models import Company
+
+@require_GET
+def get_company_details(request, company_id):
+    try:
+        company = Company.objects.get(id=company_id)
+        data = {
+            'name': company.name,
+            'desc': company.desc,
+            'start_date': company.start_date.isoformat() if company.start_date else None,
+            'end_date': company.end_date.isoformat() if company.end_date else None,
+        }
+        return JsonResponse(data)
+    except Company.DoesNotExist:
+        return JsonResponse({'error': 'Company not found'}, status=404)
+
 @csrf_protect
 def home(request):
     return render(request, 'index.html')
@@ -236,14 +254,18 @@ def update_links(request):
         user = request.user
         link, created = Link.objects.get_or_create(user=user)
         
-        platforms = request.POST.getlist('platforms[]')
-        usernames = request.POST.getlist('usernames[]')
+        platforms = request.POST.getlist('platform[]')
+        usernames = request.POST.getlist('username[]')
         
+        # Clear existing links
+        for field in Link._meta.get_fields():
+            if field.name.endswith('_username'):
+                setattr(link, field.name, None)
+        
+        # Set new links
         for platform, username in zip(platforms, usernames):
             if platform and username:
                 setattr(link, f"{platform}_username", username.strip())
-            else:
-                setattr(link, f"{platform}_username", None)
         
         link.save()
         
@@ -265,4 +287,12 @@ def update_website_style(request):
         
         return redirect('profile', username=request.user.username)
     return HttpResponseForbidden()
-
+@login_required
+def get_link_username(request, platform):
+    user = request.user
+    try:
+        link = Link.objects.get(user=user)
+        username = getattr(link, f"{platform}_username", None)
+        return JsonResponse({'username': username})
+    except Link.DoesNotExist:
+        return JsonResponse({'username': None})

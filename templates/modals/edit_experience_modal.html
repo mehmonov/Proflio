@@ -47,13 +47,23 @@ document.getElementById('companySelect').addEventListener('change', function() {
     if (companyId) {
         // Fetch company details and populate the form
         fetch(`/api/company/${companyId}/`)
-            .then(response => response.json())
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
             .then(data => {
-                document.getElementById('company_name').value = data.name;
-                document.getElementById('job_description').value = data.desc;
-                document.getElementById('start_date').value = data.start_date;
+                console.log('Received data:', data);  // Log the received data
+                document.getElementById('company_name').value = data.name || '';
+                document.getElementById('job_description').value = data.desc || '';
+                document.getElementById('start_date').value = data.start_date || '';
                 document.getElementById('end_date').value = data.end_date || '';
                 companyDetails.classList.remove('hidden');
+            })
+            .catch(error => {
+                console.error('Error fetching company details:', error);
+                alert('Error fetching company details. Please try again.');
             });
     } else {
         companyDetails.classList.add('hidden');
